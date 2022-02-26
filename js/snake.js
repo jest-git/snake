@@ -54,20 +54,28 @@ window.onload = function () {
   function snakeArrowSteering(evt) {
     switch (evt.code) {
       case "ArrowUp":
-        snakeVelX = 0;
-        snakeVelY = -1;
+        if (snakeVelY !== 1) {
+          snakeVelX = 0;
+          snakeVelY = -1;
+        }
         break;
       case "ArrowRight":
-        snakeVelX = 1;
-        snakeVelY = 0;
+        if (snakeVelX !== -1) {
+          snakeVelX = 1;
+          snakeVelY = 0;
+        }
         break;
       case "ArrowDown":
-        snakeVelX = 0;
-        snakeVelY = 1;
+        if (snakeVelY !== -1) {
+          snakeVelX = 0;
+          snakeVelY = 1;
+        }
         break;
       case "ArrowLeft":
-        snakeVelX = -1;
-        snakeVelY = 0;
+        if (snakeVelX !== 1) {
+          snakeVelX = -1;
+          snakeVelY = 0;
+        }
     }
   }
 };
