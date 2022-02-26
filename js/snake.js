@@ -8,7 +8,7 @@ window.onload = function () {
 
   //game setup
   const bgColour = "black";
-  const FPS = 30;
+  const FPS = 20;
 
   //snake setup
   const snakeColour = "lime";
@@ -27,9 +27,16 @@ window.onload = function () {
       calculateFrame();
       renderFrame();
     }, 1000 / FPS);
+
+    //snake steering
+    document.addEventListener("keydown", snakeArrowSteering);
   }
 
-  function calculateFrame() {}
+  function calculateFrame() {
+    //snake velocity
+    snakePosX += snakeVelX;
+    snakePosY += snakeVelY;
+  }
 
   function renderFrame() {
     //draw background
@@ -42,5 +49,25 @@ window.onload = function () {
   function drawRect(posX, posY, width, height, colour) {
     canvasCtx.fillStyle = colour;
     canvasCtx.fillRect(posX, posY, width, height);
+  }
+
+  function snakeArrowSteering(evt) {
+    switch (evt.code) {
+      case "ArrowUp":
+        snakeVelX = 0;
+        snakeVelY = -1;
+        break;
+      case "ArrowRight":
+        snakeVelX = 1;
+        snakeVelY = 0;
+        break;
+      case "ArrowDown":
+        snakeVelX = 0;
+        snakeVelY = 1;
+        break;
+      case "ArrowLeft":
+        snakeVelX = -1;
+        snakeVelY = 0;
+    }
   }
 };
