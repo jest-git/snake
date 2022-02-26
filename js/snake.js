@@ -10,6 +10,16 @@ window.onload = function () {
   const bgColour = "black";
   const FPS = 30;
 
+  //snake setup
+  const snakeColour = "lime";
+  let snakePosX = 10;
+  let snakePosY = 10;
+  const snakeStartTail = 5;
+  let snakeTail = snakeStartTail;
+  let snakeTrail = [];
+  let snakeVelX = 0;
+  let snakeVelY = 0;
+
   runGame();
 
   function runGame() {
