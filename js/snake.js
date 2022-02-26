@@ -34,6 +34,9 @@ window.onload = function () {
   function renderFrame() {
     //draw background
     drawRect(0, 0, canvas.width, canvas.height, bgColour);
+
+    //draw snake
+    drawRect(snakePosX * tileSizeXY, snakePosY * tileSizeXY, tileSizeXY, tileSizeXY, snakeColour);
   }
 
   function drawRect(posX, posY, width, height, colour) {
