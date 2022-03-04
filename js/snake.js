@@ -45,6 +45,13 @@ window.onload = function () {
 
     snakeBandTeleport();
 
+    //snake eat snake (must be before calculate snake trail)
+    for (var i = 0; i < snakeTrail.length; i++) {
+      if (snakeTrail[i].x === snakePosX && snakeTrail[i].y === snakePosY) {
+        snakeTail = snakeStartTail;
+      }
+    }
+
     //calculate snake trail
     snakeTrail.push({ x: snakePosX, y: snakePosY });
     while (snakeTrail.length > snakeTail) {
