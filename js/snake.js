@@ -45,9 +45,17 @@ window.onload = function () {
 
     snakeBandTeleport();
 
+    //calculate snake trail
     snakeTrail.push({ x: snakePosX, y: snakePosY });
     while (snakeTrail.length > snakeTail) {
       snakeTrail.shift();
+    }
+
+    //snake eat apple
+    if (applePosX === snakePosX && applePosY === snakePosY) {
+      snakeTail++;
+      applePosX = Math.floor(Math.random() * gridSize);
+      applePosY = Math.floor(Math.random() * gridSize);
     }
   }
 
