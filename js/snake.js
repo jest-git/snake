@@ -8,7 +8,8 @@ window.onload = function () {
 
   //game setup
   const bgColour = "black";
-  const FPS = 20;
+  const FPS = 10;
+  const tilePadding = 2;
 
   //snake setup
   const snakeColour = "lime";
@@ -36,6 +37,13 @@ window.onload = function () {
     //snake velocity
     snakePosX += snakeVelX;
     snakePosY += snakeVelY;
+
+    snakeBandTeleport();
+
+    snakeTrail.push({ x: snakePosX, y: snakePosY });
+    while (snakeTrail.length > snakeTail) {
+      snakeTrail.shift();
+    }
   }
 
   function renderFrame() {
@@ -43,9 +51,20 @@ window.onload = function () {
     drawRect(0, 0, canvas.width, canvas.height, bgColour);
 
     //draw snake
-    drawRect(snakePosX * tileSizeXY, snakePosY * tileSizeXY, tileSizeXY, tileSizeXY, snakeColour);
+    for (var i = 0; i < snakeTrail.length; i++) {
+      drawRect(
+        snakeTrail[i].x * tileSizeXY,
+        snakeTrail[i].y * tileSizeXY,
+        tileSizeXY - tilePadding,
+        tileSizeXY - tilePadding,
+        snakeColour
+      );
+    }
   }
 
+  /*
+    functions library
+  */
   function drawRect(posX, posY, width, height, colour) {
     canvasCtx.fillStyle = colour;
     canvasCtx.fillRect(posX, posY, width, height);
@@ -76,6 +95,21 @@ window.onload = function () {
           snakeVelX = -1;
           snakeVelY = 0;
         }
+    }
+  }
+
+  function snakeBandTeleport() {
+    if (snakePosX < 0) {
+      snakePosX = gridSize - 1;
+    }
+    if (snakePosX > gridSize - 1) {
+      snakePosX = 0;
+    }
+    if (snakePosY < 0) {
+      snakePosY = gridSize - 1;
+    }
+    if (snakePosY > gridSize - 1) {
+      snakePosY = 0;
     }
   }
 };
