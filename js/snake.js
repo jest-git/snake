@@ -21,6 +21,11 @@ window.onload = function () {
   let snakeVelX = 0;
   let snakeVelY = 0;
 
+  //apple setup
+  const appleColour = "red";
+  let applePosX = 12;
+  let applePosY = 12;
+
   runGame();
 
   function runGame() {
@@ -60,6 +65,15 @@ window.onload = function () {
         snakeColour
       );
     }
+
+    //draw apple
+    drawRect(
+      applePosX * tileSizeXY,
+      applePosY * tileSizeXY,
+      tileSizeXY - tilePadding,
+      tileSizeXY - tilePadding,
+      appleColour
+    );
   }
 
   /*
