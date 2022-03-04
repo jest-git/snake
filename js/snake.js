@@ -26,12 +26,16 @@ window.onload = function () {
   let applePosX = 12;
   let applePosY = 12;
 
+  //flags
+  let canPressArrow = true;
+
   runGame();
 
   function runGame() {
     setInterval(function () {
       calculateFrame();
       renderFrame();
+      canPressArrow = true;
     }, 1000 / FPS);
 
     //snake steering
@@ -102,27 +106,31 @@ window.onload = function () {
   function snakeArrowSteering(evt) {
     switch (evt.code) {
       case "ArrowUp":
-        if (snakeVelY !== 1) {
+        if (snakeVelY !== 1 && canPressArrow) {
           snakeVelX = 0;
           snakeVelY = -1;
+          canPressArrow = false;
         }
         break;
       case "ArrowRight":
-        if (snakeVelX !== -1) {
+        if (snakeVelX !== -1 && canPressArrow) {
           snakeVelX = 1;
           snakeVelY = 0;
+          canPressArrow = false;
         }
         break;
       case "ArrowDown":
-        if (snakeVelY !== -1) {
+        if (snakeVelY !== -1 && canPressArrow) {
           snakeVelX = 0;
           snakeVelY = 1;
+          canPressArrow = false;
         }
         break;
       case "ArrowLeft":
-        if (snakeVelX !== 1) {
+        if (snakeVelX !== 1 && canPressArrow) {
           snakeVelX = -1;
           snakeVelY = 0;
+          canPressArrow = false;
         }
     }
   }
