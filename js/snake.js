@@ -5,11 +5,11 @@ window.onload = function () {
   const tileSizeXY = 20;
   const gridSize = 20;
   canvas.width = canvas.height = tileSizeXY * gridSize;
-  let gridArray = gridToArray(gridSize);
+  const gridArray = gridToArray(gridSize);
 
   //game setup
   const bgColour = "black";
-  const FPS = 5;
+  const FPS = 7;
   const tilePadding = 2;
 
   //snake setup
@@ -24,7 +24,7 @@ window.onload = function () {
 
   //apple setup
   const appleColour = "red";
-  let getApplePosXY = newApplePosition(gridArray, snakeTrail);
+  const getApplePosXY = newApplePosition(gridArray, snakeTrail);
   let applePosX = getApplePosXY.x;
   let applePosY = getApplePosXY.y;
 
@@ -52,7 +52,7 @@ window.onload = function () {
     snakeBandTeleport();
 
     //snake eat snake (must be before calculate snake trail)
-    for (var i = 0; i < snakeTrail.length; i++) {
+    for (let i = 0; i < snakeTrail.length; i++) {
       if (snakeTrail[i].x === snakePosX && snakeTrail[i].y === snakePosY) {
         snakeTail = snakeStartTail;
       }
@@ -78,7 +78,7 @@ window.onload = function () {
     drawRect(0, 0, canvas.width, canvas.height, bgColour);
 
     //draw snake
-    for (var i = 0; i < snakeTrail.length; i++) {
+    for (let i = 0; i < snakeTrail.length; i++) {
       drawRect(
         snakeTrail[i].x * tileSizeXY,
         snakeTrail[i].y * tileSizeXY,
