@@ -3,12 +3,13 @@ window.onload = function () {
   let canvas = document.getElementById("gameCanvas");
   let canvasCtx = canvas.getContext("2d");
   const tileSizeXY = 20;
-  const gridSize = 30;
+  const gridSize = 20;
   canvas.width = canvas.height = tileSizeXY * gridSize;
+  let gridArray = gridToArray(gridSize);
 
   //game setup
   const bgColour = "black";
-  const FPS = 10;
+  const FPS = 5;
   const tilePadding = 2;
 
   //snake setup
@@ -23,8 +24,9 @@ window.onload = function () {
 
   //apple setup
   const appleColour = "red";
-  let applePosX = 12;
-  let applePosY = 12;
+  let getApplePosXY = newApplePosition(gridArray, snakeTrail);
+  let applePosX = getApplePosXY.x;
+  let applePosY = getApplePosXY.y;
 
   //flags
   let canPressArrow = true;
@@ -65,8 +67,9 @@ window.onload = function () {
     //snake eat apple
     if (applePosX === snakePosX && applePosY === snakePosY) {
       snakeTail++;
-      applePosX = Math.floor(Math.random() * gridSize);
-      applePosY = Math.floor(Math.random() * gridSize);
+      let applePosXY = newApplePosition(gridArray, snakeTrail);
+      applePosX = applePosXY.x;
+      applePosY = applePosXY.y;
     }
   }
 
@@ -148,5 +151,27 @@ window.onload = function () {
     if (snakePosY > gridSize - 1) {
       snakePosY = 0;
     }
+  }
+
+  function newApplePosition(gridArray, snakeArray) {
+    //get two arrays differences
+    let difference = gridArray.filter(
+      (page1) => !snakeArray.find((page2) => page1.x === page2.x && page1.y === page2.y)
+    );
+
+    //pickup new apple xy position
+    let newPositionXY = difference[Math.floor(Math.random() * difference.length)];
+
+    return newPositionXY;
+  }
+
+  function gridToArray(gridSize) {
+    let gridArray = [];
+    for (let i = 0; i < gridSize; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        gridArray.push({ x: i, y: j });
+      }
+    }
+    return gridArray;
   }
 };
